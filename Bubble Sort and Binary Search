@@ -1,0 +1,86 @@
+#include<stdio.h>
+int bubble(int [],int);
+void search(int [],int,int);
+int main()
+{
+    int length,i,num,numsearch;//for basic main functions
+    printf("Enter the length of the array: ");
+    scanf("%d",&length);
+    int arr[length];
+    for(i=0;i<length;i++)
+    {
+        scanf(" %d",&num);
+        arr[i]=num;
+    }
+    bubble(arr,length);
+    printf("\nWhich number you are searching: ");
+    scanf("%d",&numsearch);
+    search(arr,numsearch,length);
+}
+int bubble(int arr[],int len)
+{//bubble sorting
+    int i,next,currnt,prt,escape=0;
+    while(escape==0)
+    {
+    for(i=0;i<len-1;i++)
+    {
+        currnt=arr[i];
+        next=arr[i+1];
+        if(currnt>next)
+        {
+            arr[i]=next;
+            arr[i+1]=currnt;
+        }
+        printf("\n%d. Test\n",i+1);
+        for(prt=0;prt<len;prt++)
+            printf("%d ",arr[prt]);
+    }
+    printf("\n--------------------------\n");
+    escape=1;
+        for(i=0;i<len-1;i++)
+        {
+            if(arr[i]>arr[i+1])
+            {
+                escape=0;
+                break;
+            }
+        }
+    }
+    return arr;
+}
+void search(int arr[],int num,int len)
+{//binary search
+    int low=0,up=len,mid,found=0;
+    while(!((low+1==mid)&&(mid+1==up)))
+    {
+        mid=(up+low)/2;
+        if(arr[mid]==num)
+        {
+            printf("%d exists at %d. index",num,mid);
+            found=1;
+            break;
+        }
+        else if(arr[low]==num)
+        {
+            printf("%d exists at %d. index",num,low);
+            found=1;
+            break;
+        }
+        else if(arr[up]==num)
+        {
+            printf("%d exists at %d. index",num,up);
+            found=1;
+            break;
+        }
+        else
+        {
+            if(num>arr[mid])
+                low=mid;
+            else if(num<arr[mid])
+                up=mid;
+        }
+    }
+    if(found!=1)
+        printf("Doesn't exist.");
+    printf("\n");
+}
